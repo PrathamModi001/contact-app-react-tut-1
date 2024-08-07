@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { v4 as uuidv4 } from 'uuid';  // Note the import
 
 function AddContact({ addContactHandler }) {
     const [name, setName] = useState('');
@@ -12,7 +13,7 @@ function AddContact({ addContactHandler }) {
         }
 
         const newContact = {
-            id: Math.floor(Math.random() * 1000),
+            id: uuidv4(),
             name,
             email,
         };
