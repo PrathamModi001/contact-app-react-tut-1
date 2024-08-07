@@ -5,6 +5,7 @@ import AddContact from './AddContact';
 import ContactList from './ContactList';
 import { BrowserRouter } from 'react-router-dom';
 import { Routes, Route } from 'react-router'
+import CardDetail from './CardDetail';
 
 function App() {
   const LOCAL_STORAGE_KEY = 'contacts';
@@ -39,13 +40,12 @@ function App() {
   return (
     <div className="App">
       <BrowserRouter>
-        <Header />
+        <Header />  
         <Routes>
           <Route path="/" element={<ContactList contacts={contacts} removeContactHandler={removeContactHandler} />} />
           <Route path="/add" element={<AddContact addContactHandler={addContactHandler} />} />
+          <Route path="/contact/:id" element={<CardDetail contacts={contacts} />} />
         </Routes>
-        {/* <AddContact addContactHandler={addContactHandler}/>
-      <ContactList contacts={contacts} removeContactHandler={removeContactHandler}/> */}
 
       </BrowserRouter>
     </div>
