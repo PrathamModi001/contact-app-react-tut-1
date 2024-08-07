@@ -2,7 +2,7 @@ import React from 'react';
 import { CgProfile } from "react-icons/cg";
 import { FaRegTrashAlt } from "react-icons/fa";
 
-function CardContact({ contacts, removeContactHandler }) {
+function CardContact({ contacts, deleteContactHandler }) {
     return (
         <ul className="space-y-4">
             {contacts.map((contact) => {
@@ -16,7 +16,7 @@ function CardContact({ contacts, removeContactHandler }) {
                         </div>
                         <FaRegTrashAlt className="h-6 w-6 cursor-pointer"
                             onClick={() => {
-                                removeContactHandler(id);
+                                deleteContactHandler(id);
                             }}
                         />
                     </div>
