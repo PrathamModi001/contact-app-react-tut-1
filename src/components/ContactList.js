@@ -9,7 +9,8 @@ export default function ContactList({ contacts, removeContactHandler}) {
 
     return (
         <div className="container py-4 px-6 max-w-md mx-auto">
-            <CardContact contacts={contacts} deleteContactHandler={deleteContactHandler}/>
+            {console.log(contacts)}
+            <CardContact contacts={contacts} deleteContactHandler={deleteContactHandler} />
         </div>
     );
 }

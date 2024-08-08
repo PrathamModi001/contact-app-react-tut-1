@@ -1,10 +1,10 @@
 import React from 'react';
-import { CgProfile } from "react-icons/cg";
 import { FaRegTrashAlt } from "react-icons/fa";
+import { MdEdit } from "react-icons/md";
 import { useNavigate } from 'react-router-dom';
 import img from './user.jpg'
 
-function CardContact({ contacts, deleteContactHandler }) {
+function CardContact({ contacts, deleteContactHandler}) {
     const navigate = useNavigate();
 
     return (
@@ -28,6 +28,10 @@ function CardContact({ contacts, deleteContactHandler }) {
                         <FaRegTrashAlt
                             className="text-red-600 h-6 w-6 ml-4 cursor-pointer hover:text-red-800 transition-colors duration-300"
                             onClick={() => deleteContactHandler(id)}
+                        />
+                        <MdEdit
+                            className="text-blue-600 h-6 w-6 ml-4 cursor-pointer hover:text-blue-800 transition-colors duration-300"
+                            onClick={() => navigate(`/edit/${id}`)}
                         />
                     </li>
                 );

@@ -1,26 +1,29 @@
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { v4 as uuidv4 } from 'uuid';  // Note the import
+import React, { useState, useEffect } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
 
-function AddContact({ addContactHandler }) {
-    const [name, setName] = useState('');
-    const [email, setEmail] = useState('');
+function EditContact({ contacts, editContactHandler }) {
+    const { id } = useParams();
+    const contact = contacts.find(contact => contact.id === id);
+
+    const [name, setName] = useState(contact ? contact.name : '');
+    const [email, setEmail] = useState(contact ? contact.email : '');
 
     const navigate = useNavigate();
-    const add = (e) => {
+
+    const update = (e) => {
         e.preventDefault();
         if (name === '' || email === '') {
             alert('All fields are mandatory!');
             return;
         }
 
-        const newContact = {
-            id: uuidv4(),
+        const updatedContact = {
+            id: contact.id,
             name,
             email,
         };
 
-        addContactHandler(newContact);
+        editContactHandler(updatedContact);
 
         // Clear the form
         setName('');
@@ -28,10 +31,16 @@ function AddContact({ addContactHandler }) {
         navigate('/');
     };
 
+    useEffect(() => {
+        if (!contact) {
+            navigate('/');
+        }
+    }, [contact, navigate]);
+
     return (
         <div className="max-w-lg mx-auto p-6 bg-white rounded-lg shadow-md">
-            <h2 className="text-2xl font-bold mb-6 text-gray-800">Add Contact</h2>
-            <form className="space-y-4" onSubmit={add}>
+            <h2 className="text-2xl font-bold mb-6 text-gray-800">Edit Contact</h2>
+            <form className="space-y-4" onSubmit={update}>
                 <div>
                     <label htmlFor="name" className="block text-gray-700 font-medium mb-1">Name</label>
                     <input
@@ -62,11 +71,11 @@ function AddContact({ addContactHandler }) {
                     type="submit"
                     className="w-full py-2 px-4 bg-blue-600 text-white font-semibold rounded-lg shadow-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50"
                 >
-                    Add
+                    Update
                 </button>
             </form>
         </div>
     );
 }
 
-export default AddContact;
+export default EditContact;

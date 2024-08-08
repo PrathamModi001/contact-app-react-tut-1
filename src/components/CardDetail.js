@@ -5,7 +5,6 @@ import img from './user.jpg';
 function CardDetail({ contacts }) {
     const { id } = useParams();
     const contact = contacts.find(contact => contact.id === id);
-
     if (!contact) {
         return <p>Contact not found</p>;
     }
